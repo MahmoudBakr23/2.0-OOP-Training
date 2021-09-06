@@ -1,4 +1,5 @@
 require './person.rb'
+require './classroom.rb'
 
 class Student < Person
   belongs_to :classroom
