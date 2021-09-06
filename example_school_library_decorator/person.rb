@@ -3,6 +3,9 @@ require './corrector.rb'
 class Person
   attr_accessor :name, :age
   attr_reader :id
+
+  has_many :rentals
+  has_many :books, through: :rentals
   
   def initialize(age, name = "Unknown", parent_permission = true)
     @id = Random.rand(1..1000)
