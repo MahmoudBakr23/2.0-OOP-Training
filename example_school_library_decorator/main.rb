@@ -131,17 +131,17 @@ def main
 
     case selection
     when '1'
-      app.list_all_books
+      app.list_all_books()
     when '2'
-      app.list_all_people
+      app.list_all_people()
     when '3'
-      app.create_person
+      app.create_person()
     when '4'
-      app.create_book
+      app.create_book()
     when '5'
-      app.create_rental
+      app.create_rental()
     when '6'
-      app.list_all_rentals_for_person_id
+      app.list_all_rentals_for_person_id()
     when '7'
       puts 'Thank you for using this app!'
     end
@@ -149,4 +149,4 @@ def main
   end
 end
 
-main
+main()
