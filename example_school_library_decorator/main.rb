@@ -1,6 +1,6 @@
 require './app'
-
-def main
+# rubocop:disable Metrics/CyclomaticComplexity
+def main # rubocop:disable Metrics/MethodLength
   app = App.new
   response = nil
 
@@ -36,5 +36,5 @@ def main
     puts "\n"
   end
 end
-
+# rubocop:enable Metrics/CyclomaticComplexity
 main
