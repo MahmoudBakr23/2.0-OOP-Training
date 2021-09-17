@@ -2,7 +2,10 @@
 
 # Project Name
 
-> One paragraph statement about the project.
+>This repo host an initial code for the tasks performed during the Code Reviewers training.
+
+>Application is based on the Ruby OOP: school library projects 1 and 2.
+
 
 ![screenshot](./app_screenshot.png)
 
