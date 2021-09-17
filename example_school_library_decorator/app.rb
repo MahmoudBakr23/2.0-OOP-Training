@@ -36,7 +36,7 @@ class App
   def create_person
     validate_person
     @people << Student.new(@age, @name, @parent_permission)
-    @people << Teacher.new(@age, @specialization, @name)
+    @people << Teacher.new(@age, @name, @specialization)
     puts 'Person created successfully'
   end
 
@@ -49,7 +49,8 @@ class App
       puts 'Invalid option'
       nil
     end
-    if @person_type == '1'
+    case @person_type
+    when '1'
       print 'Age: '
       @age = gets.chomp
 
@@ -58,7 +59,7 @@ class App
       print 'Has parent permission? [Y/N]: '
       @parent_permission = gets.chomp
       @parent_permission = @parent_permission.downcase == 'y'
-    elsif @person_type == '2'
+    when '2'
       print 'Specialization: '
       @specialization = gets.chomp
     end
