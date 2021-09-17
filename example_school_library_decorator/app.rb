@@ -24,10 +24,11 @@ class App
   # List all people
   def list_all_people
     if @people.length.positive?
-      @people.each { |person| puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-
+      @people.each do |person|
+        puts "name: #{person.name}, age: #{person.age}, id: #{person.id}"
+      end
     else
-      puts 'There are no people created'
+      puts 'Sorry! cannot find person'
     end
   end
 
@@ -35,7 +36,7 @@ class App
   def create_person
     validate_person
     @people << Student.new(@age, @name, @parent_permission)
-    @people << Teacher.new(@age, specialization, @name)
+    @people << Teacher.new(@age, @specialization, @name)
     puts 'Person created successfully'
   end
 
@@ -48,12 +49,12 @@ class App
       puts 'Invalid option'
       nil
     end
-    print 'Age: '
-    @age = gets.chomp
-
-    print 'Name: '
-    @name = gets.chomp
     if @person_type == '1'
+      print 'Age: '
+      @age = gets.chomp
+
+      print 'Name: '
+      @name = gets.chomp
       print 'Has parent permission? [Y/N]: '
       @parent_permission = gets.chomp
       @parent_permission = @parent_permission.downcase == 'y'
@@ -80,29 +81,28 @@ class App
 
   # Create a rental
   def create_rental
-    validate_rental
+    puts 'Please select a book from the folowing list'
     @books.each_with_index do |book, index|
-      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+      puts "#{index}) title: '#{book.title}', author: #{book.author}"
     end
+    book_index = gets.chomp.to_i
+
+    puts 'Please select a person from the following list'
     @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      puts "#{index}) [#{person.class}] name: #{person.name}, age: #{person.age}, id: #{person.id}"
     end
+    person_index = gets.chomp.to_i
 
-    @rentals << Rental.new(@date, @books[@book_index], @people[@person_index])
+    print 'date: '
+    date = gets.chomp
+
+    @rentals << Rental.new(date, @books[book_index], @people[person_index])
     puts 'Rental created successfully'
-  end
-
-  def validate_rental
-    puts 'Select a book from the following list by number'
-    @book_index = gets.chomp.to_i
-    puts "\nSelect a person from the following list by number (not id)"
-    @person_index = gets.chomp.to_i
-    print "\nDate: "
-    @date = gets.chomp
   end
 
   # List all rentals for a given person id
   def list_all_rentals_for_person_id
+    validate_rentals_id
     rentals = @rentals.filter { |rental| rental.person.id == @id }
     puts 'Rentals:'
     rentals.each do |rental|
