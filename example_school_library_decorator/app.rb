@@ -103,16 +103,12 @@ class App
 
   # List all rentals for a given person id
   def list_all_rentals_for_person_id
-    validate_rentals_id
-    rentals = @rentals.filter { |rental| rental.person.id == @id }
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    rentals = @rentals.filter { |rental| rental.person.id == id }
     puts 'Rentals:'
     rentals.each do |rental|
       puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author}"
     end
-  end
-
-  def validate_rentals_id
-    print 'ID of person: '
-    @id = gets.chomp.to_i
   end
 end
