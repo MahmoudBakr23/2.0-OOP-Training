@@ -33,36 +33,39 @@ class App
 
   # Create a person
   def create_person
-    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-    person_type = gets.chomp
-
-    if person_type != '1' && person_type != '2'
-      puts 'Invalid option'
-      return
-    end
-
-    print 'Age: '
-    age = gets.chomp
-
-    print 'Name: '
-    name = gets.chomp
+    validate_person
 
     person =
-      if person_type == '1'
-        print 'Has parent permission? [Y/N]: '
-        parent_permission = gets.chomp
-        parent_permission = parent_permission.downcase == 'y'
-
-        Student.new(age, name, parent_permission)
-      elsif person_type == '2'
-        print 'Specialization: '
-        specialization = gets.chomp
-
-        Teacher.new(age, specialization, name)
-      end
+      Student.new(@age, @name, @parent_permission)
+    Teacher.new(@age, @specialization, @name)
 
     @people << person
     puts 'Person created successfully'
+  end
+
+  # Validate person
+
+  def validate_person
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    @person_type = gets.chomp
+    case @person_type
+    when @person_type != '1' && @person_type != '2'
+      puts 'Invalid option'
+      nil
+    when @person_type == '1'
+      print 'Has parent permission? [Y/N]: '
+      @parent_permission = parent_permission.downcase == 'y'
+
+    when @person_type == '2'
+      print 'Specialization: '
+      @specialization = gets.chomp
+    end
+    print 'Age: '
+    @age = gets.chomp
+
+    print 'Name: '
+    @name = gets.chomp
+    @parent_permission = gets.chomp
   end
 
   # Create a book
